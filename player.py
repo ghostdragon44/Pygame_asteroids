@@ -6,11 +6,15 @@ from constants import PLAYER_SPEED
 
 class Player (CircleShape):
     def __init__(self,x,y):
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        self.image = pygame.Surface([1,1])
+        self.rect = self.image.get_rect()
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
     
     def draw(self, screen):
-        pygame.draw.polygon(screen, "white", self.triangle(), 2)
+        points = self.triangle()
+        pygame.draw.polygon(screen, (255,255,255), points, 2)
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
